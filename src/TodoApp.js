@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Form, Button, InputGroup, FormControl } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Form, Button, InputGroup, FormControl } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-const APP_NAME = 'TODO_APP'
+const APP_NAME = 'TODO_APP!'
 
 const TodoApp = () => {
-    const [todo, setTodo] = useState([])
+    const initTodo = () => (
+        JSON.parse(localStorage.getItem(APP_NAME)||'[]')
+    )
+    const [todo, setTodo] = useState(initTodo)
     const [task, setTask] = useState('')
     const [disabled, setdisabled] = useState(true)
 
     useEffect(() => {
-        window.addEventListener('onload', loadLocalStrage)
-        window.addEventListener('beforeunload', writeLocalStrage)
-        return () => {
-            window.removeEventListener('onload', writeLocalStrage);
-            window.removeEventListener('beforeunload', writeLocalStrage);
-        }
+        writeLocalStrage()
     })
-
-    const loadLocalStrage = () => {
-        localStorage[APP_NAME] = JSON.parse(localStorage[APP_NAME])
-    }
     const writeLocalStrage = () => {
-        localStorage[APP_NAME] = JSON.stringify(todo)
+        localStorage.setItem(APP_NAME, JSON.stringify(todo))
     }
 
     const enterTask = (e) => {
