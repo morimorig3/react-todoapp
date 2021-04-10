@@ -7,3 +7,4 @@
 * React
 * React Hooks
 * React Bootstrap
+* localstrage

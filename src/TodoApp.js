@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { FaGithub } from 'react-icons/fa'
 
 const APP_NAME = 'TODO_APP!'
 
 const TodoApp = () => {
     const styleS = {
         color:'#cccccc'
+    }
+    const styleGithub = {
+        color:'#000000',
+        fontSize:'30px'
     }
     const initTodo = () => (
         JSON.parse(localStorage.getItem(APP_NAME)||'[]')
@@ -50,7 +55,7 @@ const TodoApp = () => {
     return (
         <Container className="py-sm-4 py-2">
             <Row>
-                <Col><h1 className="font-weight-bold">TO DO APP</h1></Col>
+                <Col className='d-flex justify-content-between'><h1 className="font-weight-bold">TO DO APP</h1><a style={styleGithub} href='https://github.com/tashirimo/react-todoapp' target='_blank' rel="noreferrer"><FaGithub /></a></Col>
             </Row>
             <Row className="mb-3">
                 <Col>
