@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const APP_NAME = 'TODO_APP!'
 
 const TodoApp = () => {
+    const styleS = {
+        color:'#cccccc'
+    }
     const initTodo = () => (
         JSON.parse(localStorage.getItem(APP_NAME)||'[]')
     )
@@ -39,6 +42,11 @@ const TodoApp = () => {
         newTask.splice(index, 1)
         setTodo(newTask)
     }
+    const completedTask = (index) => {
+        const newTask = [...todo]
+        newTask[index].isCompleted = !newTask[index].isCompleted
+        setTodo(newTask)
+    }
     return (
         <Container className="py-sm-4 py-2">
             <Row>
@@ -48,7 +56,7 @@ const TodoApp = () => {
                 <Col>
                 <Form onSubmit={addTask}>
                     <Form.Row className="align-items-center">
-                        <Col xs={12} sm={10}>
+                        <Col xs={12} sm={10} className='mb-2'>
                             <Form.Control
                                 required
                                 type="text"
@@ -58,7 +66,7 @@ const TodoApp = () => {
                                 onChange={enterTask}
                             />
                         </Col>
-                        <Col xs={12} sm={2}>
+                        <Col xs={12} sm={2} className='mb-2'>
                             <Button type="submit" variant="primary" disabled={disabled} block>
                                 追加
                             </Button>
@@ -70,14 +78,28 @@ const TodoApp = () => {
             <Row>
                 <Col>
                     <ul className="p-0">
-                        {todo.map((todo, index) => (                            
-                            <li className="d-flex align-items-center border p-2 mb-2 rounded" key={index}>
-                                <span className="col-10 text-break">{todo.task}</span>
+                        {todo.map((todo, index) => {
+                            return (
+                                <li className="d-flex align-items-center border p-2 mb-2 rounded" key={index}>
+                                <span className="col-10 text-break form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id={`check-${index}`}
+                                        checked={todo.isCompleted}
+                                        onChange={() => completedTask(index)}
+                                    />
+                                    <label className="form-check-label" htmlFor={`check-${index}`}>
+                                        {todo.isCompleted ? <s style={styleS}>{todo.task}</s> : todo.task}
+                                    </label>
+                                </span>
                                 <div className="col-2 d-flex align-items-center justify-content-center">
                                     <Button onClick={() => deleteTask(index)} type="button" variant="danger">×</Button>
                                 </div>
                             </li>
-                        ))}
+                            )
+                        })}
                     </ul>
                 </Col>
             </Row>
