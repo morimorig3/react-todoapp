@@ -55,7 +55,7 @@ const TodoApp = () => {
     return (
         <Container className="py-sm-4 py-2">
             <Row>
-                <Col className='d-flex justify-content-between'><h1 className="font-weight-bold">TO DO APP</h1><a style={styleGithub} href='https://github.com/tashirimo/react-todoapp' target='_blank' rel="noreferrer"><FaGithub /></a></Col>
+                <Col className='d-flex justify-content-between'><h1 className="font-weight-bold">TO DO APP</h1><a style={styleGithub} href='https://github.com/morimorig3/react-todoapp' target='_blank' rel="noreferrer"><FaGithub /></a></Col>
             </Row>
             <Row className="mb-3">
                 <Col>
